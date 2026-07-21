@@ -11,7 +11,7 @@ CREATE TABLE tbl_movies (
     category_id INT NOT NULL,
     title VARCHAR(200) NOT NULL,
     description TEXT,
-    poster VARCHAR(200), 
+    poster VARCHAR(200), ~
     duration_minutes INT NOT NULL,
     release_date DATE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

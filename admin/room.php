@@ -5,16 +5,16 @@
 <div class="main-content">
 
   <!-- ===================== DASHBOARD ===================== -->
-  <div class="view active" id="view-dashboard">
+  <div class="view active" >
     <div class="topbar px-4 py-3 d-flex justify-content-between align-items-center">
       <div class="d-flex align-items-center gap-2">
-        <button class="btn btn-outline-cinema d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('show')"><i class="bi bi-list"></i></button>
+        <button class="btn btn-outline-cinema d-lg-none" ><i class="bi bi-list"></i></button>
         <div>
           <h1 class="font-display fs-2 mb-0">Dashboard</h1>
           <div class="text-muted small">ព័ត៌មានសង្ខេបប្រព័ន្ធកក់សំបុត្រកុន</div>
         </div>
       </div>
-      <a href="createCategory.php" class="btn btn-marquee"><i class="bi bi-plus-lg"></i> New Category</a>
+      <a href="createRoom.php" class="btn btn-marquee"><i class="bi bi-plus-lg"></i> New Room</a>
     </div>
 
   </div>
@@ -33,11 +33,14 @@
   <div class="row m-3">
         <div class="col-12">
           <div class="card p-3">
-            <h3>Category</h3>
+            <h3>Cinema Room</h3>
           </div>
         </div>
   </div>
 
+
 </div>
+
+
 </body>
 </html>
