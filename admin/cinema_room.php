@@ -14,7 +14,7 @@
           <div class="text-muted small">ព័ត៌មានសង្ខេបប្រព័ន្ធកក់សំបុត្រកុន</div>
         </div>
       </div>
-      <button class="btn btn-marquee"><i class="bi bi-plus-lg"></i> New Moview</button>
+      <button class="btn btn-marquee"><i class="bi bi-plus-lg"></i> New Cinema Room</button>
     </div>
 
   </div>
@@ -33,7 +33,7 @@
   <div class="row m-3">
         <div class="col-12">
           <div class="card p-3">
-            <h3>Movie</h3>
+            <h3>Cinema Room</h3>
           </div>
         </div>
   </div>
