@@ -1,6 +1,6 @@
 
 <?php 
-  include("../include/sidebar.php");
+   include("../include/sidebar.php");
 ?>
 <div class="main-content">
 
@@ -14,7 +14,7 @@
           <div class="text-muted small">ព័ត៌មានសង្ខេបប្រព័ន្ធកក់សំបុត្រកុន</div>
         </div>
       </div>
-      <button class="btn btn-marquee"><i class="bi bi-plus-lg"></i> New Moview</button>
+      <a href="createMovie.php" class="btn btn-marquee"><i class="bi bi-plus-lg"></i> New Moview</a>
     </div>
 
   </div>

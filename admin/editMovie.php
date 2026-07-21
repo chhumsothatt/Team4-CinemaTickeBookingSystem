@@ -1,6 +1,6 @@
 
 <?php 
-  include("../include/sidebar.php");
+    include("../include/sidebar.php");
 ?>
 <div class="main-content">
 
@@ -14,7 +14,7 @@
           <div class="text-muted small">ព័ត៌មានសង្ខេបប្រព័ន្ធកក់សំបុត្រកុន</div>
         </div>
       </div>
-      <a href="createCategory.php" class="btn btn-marquee"><i class="bi bi-plus-lg"></i> New Category</a>
+      <button class="btn btn-marquee"><i class="bi bi-plus-lg"></i> New Moview</button>
     </div>
 
   </div>
@@ -33,11 +33,14 @@
   <div class="row m-3">
         <div class="col-12">
           <div class="card p-3">
-            <h3>Category</h3>
+            <h3>Edit Movie</h3>
           </div>
         </div>
   </div>
 
+
 </div>
+
+
 </body>
 </html>

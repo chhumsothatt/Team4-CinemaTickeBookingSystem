@@ -1,6 +1,6 @@
 
 <?php 
-  include("../include/sidebar.php");
+   include("../include/sidebar.php");
 ?>
 <div class="main-content">
 
@@ -33,7 +33,7 @@
   <div class="row m-3">
         <div class="col-12">
           <div class="card p-3">
-            <h3>Show Time</h3>
+            <h3>Edit Show Time</h3>
           </div>
         </div>
   </div>
