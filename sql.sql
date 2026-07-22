@@ -43,7 +43,7 @@ CREATE TABLE tbl_showtimes (
 -- 5. Seats Table
 CREATE TABLE tbl_seats (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    room_id INT NOT NULL,
+    room_id INT NOT NULL,~
     seat_row VARCHAR(200) NOT NULL,
     seat_number INT NOT NULL,      
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
