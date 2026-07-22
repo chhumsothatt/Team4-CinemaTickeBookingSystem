@@ -1,46 +1,45 @@
+<?php include("../include/sidebar.php"); ?>
 
-<?php 
-    include("../include/sidebar.php");
-?>
-<div class="main-content">
+<div class="main-content p-4">
 
-  <!-- ===================== DASHBOARD ===================== -->
-  <div class="view active" id="view-dashboard">
-    <div class="topbar px-4 py-3 d-flex justify-content-between align-items-center">
-      <div class="d-flex align-items-center gap-2">
-        <button class="btn btn-outline-cinema d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('show')"><i class="bi bi-list"></i></button>
-        <div>
-          <h1 class="font-display fs-2 mb-0">Dashboard</h1>
-          <div class="text-muted small">ព័ត៌មានសង្ខេបប្រព័ន្ធកក់សំបុត្រកុន</div>
-        </div>
-      </div>
-      <a href="createTime.php" class="btn btn-marquee"><i class="bi bi-plus-lg"></i> New Showtime</a>
+  <!-- Header Section -->
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <div>
+      <h2 class="font-display fw-bold mb-0 text-uppercase">Showtimes</h2>
+      <div class="text-muted small">គ្រប់គ្រងកាលវិភាគបញ្ចាំងភាពយន្ត</div>
     </div>
-
+    <a href="createTime.php" class="btn btn-warning fw-semibold px-3" style="background-color: #e7810c; color: white; border: none;">
+      + Add Showtime
+    </a>
   </div>
 
-  <!-- ===================== MOVIES ===================== -->
-  <div class="view" id="view-movies">
-    <div class="topbar px-4 py-3 d-flex justify-content-between align-items-center">
-      <div class="d-flex align-items-center gap-2">
-        <button class="btn btn-outline-cinema d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('show')"><i class="bi bi-list"></i></button>
-        <div><h1 class="font-display fs-2 mb-0">Movies</h1><div class="text-muted small">គ្រប់គ្រងព័ត៌មានភាពយន្ត</div></div>
+  <div class="border-bottom my-3" style="border-style: dashed !important; opacity: 0.3;"></div>
+
+  <!-- Table Section -->
+  <div class="card border-0 shadow-sm">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr class="text-uppercase small text-muted">
+              <th>Movie</th>
+              <th>Room</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="showtime_table_body">
+            <!-- Data loaded via AJAX -->
+          </tbody>
+        </table>
       </div>
-      <button class="btn btn-marquee" data-bs-toggle="modal" data-bs-target="#movieModal"><i class="bi bi-plus-lg"></i> Add Movie</button>
     </div>
-    <div class="filmstrip-thin"></div>
   </div>
-  <div class="row m-3">
-        <div class="col-12">
-          <div class="card p-3">
-            <h3>Show Time</h3>
-          </div>
-        </div>
-  </div>
-
 
 </div>
 
-
+<script src="../jquery/jquery-3.7.1.min.js"></script>
+<script src="../js/showtime.js"></script>
 </body>
 </html>
