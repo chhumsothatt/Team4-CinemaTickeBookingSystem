@@ -20,6 +20,7 @@ include("../include/header.php");
       </ul>
       <div class="d-flex gap-2 mt-3 mt-lg-0">
         <?php 
+        // session_start();
         if(isset ($_SESSION['role'] )){ 
           echo '<a href="../login.php" class="btn btn-outline-cinema px-3">ចូល / Login</a>
           <a href="../register.php" class="btn btn-marquee px-3">ចុះឈ្មោះ</a>';
@@ -27,7 +28,7 @@ include("../include/header.php");
          }else{
             echo '<a id="btnLogout" class="btn btn-danger px-3">ចេញ / Logout</a>';
          }
-         if($_SESSION['user_role'] === 'admin'){
+         if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin'){
           echo '<a href="../admin/dashboard.php" class="btn btn-primary border-0 px-3">Dashboard</a>';
          }
          ?>
@@ -39,7 +40,7 @@ include("../include/header.php");
 <div class="filmstrip"></div>
 
 <!-- HERO -->
-<section class="hero" id="top" style="hieght: 50vh; margin-top: -200px;">
+<section class="hero" id="top" style=" height: 50vh; margin-top: -200px;">
   <!-- <span class="ribbon">NOW SHOWING</span> -->
   <div class="container pb-5 pt-5">
     <div class="text-marquee fw-bold small text-uppercase mb-2" style="letter-spacing:2px;">
