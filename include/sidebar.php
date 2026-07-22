@@ -1,3 +1,8 @@
+<?php
+  require_once '../middleware/authMiddlware.php';
+  requireAuthPage();
+?>
+
 <!DOCTYPE html>
 <html lang="km">
 <head>
@@ -9,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+Khmer:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-
+<script src="../jquery/jquery-3.7.1.min.js"></script>
 <style>
   :root{
     --void:#faf8f2;
@@ -95,7 +100,9 @@
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
   <div class="brand d-flex align-items-center gap-2 font-display fs-3">
-    <span class="bulb"></span><span class="text-marquee">CINÉ</span><span class="fs-6 fw-normal">ADMIN</span>
+    <a href="../client/index.php" class="nav-link">
+      <span class="bulb"></span><span class="text-marquee">CINÉ</span><span class="fs-6 fw-normal">ADMIN</span>
+    </a>
   </div>
 
   <nav class="nav flex-column p-2 pt-3">
@@ -118,7 +125,24 @@
       <div class="fw-semibold small">Sok Admin</div>
       <div class="text-muted" style="font-size:11px;">Administrator</div>
     </div>
-    <button class="btn btn-sm btn-outline-cinema ms-auto"><i class="bi bi-box-arrow-right"></i></button>
+    <button id="btnLogout" class="btn text-light btn-danger btn-sm btn-outline-cinema ms-auto"><i class="bi bi-box-arrow-right"></i></button>
   </div>
 
 </aside>
+<script>
+    $(document).ready(function(){
+    $('#btnLogout').click(function(){
+      $.ajax({
+        url: '../api/auth_handler.php',
+        method: 'POST',
+        dataType: 'json',
+        data: {action: 'logout'},
+        success: function(){
+          window.location.href = '../login.php';
+        }
+      })
+      // alert(123);
+      
+    })
+  })
+</script>

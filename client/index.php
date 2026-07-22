@@ -1,102 +1,8 @@
-<!DOCTYPE html>
-<html lang="km">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CINÉ MARQUEE — កក់សំបុត្រកុន</title>
+<?php 
+session_start();
+include("../include/header.php");
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+Khmer:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-
-<style>
-  :root{
-    --void:#faf8f2;
-    --surface-line:#e5ded0;
-    --marquee:#c9932e;
-    --marquee-dim:#a3812f;
-    --velvet:#b3242e;
-    --velvet-bright:#d93244;
-    --ink:#221c28;
-    --ink-muted:#726a80;
-    --font-display:'Bebas Neue','Noto Sans Khmer',sans-serif;
-    --font-mono:'JetBrains Mono', monospace;
-  }
-  body{background:var(--void); color:var(--ink); font-family:'Inter','Noto Sans Khmer',sans-serif;}
-  .font-display{font-family:var(--font-display); letter-spacing:.5px;}
-  .font-mono{font-family:var(--font-mono);}
-  .text-marquee{color:var(--marquee) !important;}
-  .text-velvet{color:var(--velvet) !important;}
-  .btn-marquee{background:var(--marquee); border-color:var(--marquee); color:#1a1408; font-weight:700;}
-  .btn-marquee:hover{background:var(--marquee-dim); border-color:var(--marquee-dim); color:#1a1408;}
-  .btn-velvet{background:var(--velvet); border-color:var(--velvet); color:#fff; font-weight:700;}
-  .btn-velvet:hover{background:var(--velvet-bright); border-color:var(--velvet-bright); color:#fff;}
-  .btn-outline-cinema{border-color:var(--surface-line); color:var(--ink); font-weight:600;}
-  .btn-outline-cinema:hover{border-color:var(--marquee-dim); background:transparent; color:var(--marquee-dim);}
-
-  /* film-strip divider — recurring cinema motif */
-  .filmstrip{
-    height:20px;
-    background:
-      repeating-linear-gradient(90deg, var(--void) 0 10px, transparent 10px 22px),
-      var(--surface-line);
-    background-size: 22px 100%, 100% 100%;
-    border-top:1px solid var(--surface-line);
-    border-bottom:1px solid var(--surface-line);
-  }
-
-  .navbar-brand .bulb{width:7px;height:7px;border-radius:50%;background:var(--marquee); box-shadow:0 0 8px 2px var(--marquee); display:inline-block; animation:blink 1.6s infinite ease-in-out;}
-  @keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
-
-  /* hero */
-  .hero{
-    position:relative; min-height:70vh; display:flex; align-items:flex-end;
-    background:
-      linear-gradient(180deg, rgba(34,28,40,.2) 0%, rgba(250,248,242,.98) 90%),
-      radial-gradient(ellipse at 30% 20%, rgba(179,36,46,.35), transparent 55%),
-      url('https://images.unsplash.com/photo-1489599162946-9f6f0b3f6b2f?w=1400&q=60') center/cover;
-  }
-  .hero .ribbon{
-    position:absolute; top:32px; right:-58px; background:var(--velvet); color:#fff;
-    font-family:var(--font-display); font-size:13px; letter-spacing:3px;
-    padding:7px 70px; transform:rotate(38deg); box-shadow:0 4px 14px rgba(0,0,0,.25);
-  }
-  .hero h1{font-size:clamp(48px,8vw,96px); line-height:.95; text-shadow:0 6px 24px rgba(0,0,0,.3);}
-  .badge-tag{border:1px solid var(--marquee-dim); color:var(--marquee); font-weight:700; font-size:11px; letter-spacing:.5px; background:transparent;}
-
-  /* movie cards */
-  .movie-card{overflow:hidden; border-color:var(--surface-line); cursor:pointer; transition:transform .2s ease, box-shadow .2s ease;}
-  .movie-card:hover{transform:translateY(-4px); box-shadow:0 10px 30px -12px rgba(34,28,40,.25); border-color:var(--marquee-dim);}
-  .poster-wrap{aspect-ratio:2/3; background-size:cover; background-position:center; position:relative;}
-  .poster-wrap .cat-badge{position:absolute; bottom:10px; left:10px;}
-
-  /* seats */
-  .screen-arc{width:70%; height:6px; margin:0 auto 8px; border-radius:50%; background:radial-gradient(ellipse at center, rgba(201,147,46,.5), transparent 75%);}
-  .seat-map{display:grid; grid-template-columns:repeat(10,1fr); gap:8px; max-width:520px; margin:0 auto;}
-  .seat{
-    aspect-ratio:1; border-radius:5px 5px 8px 8px; background:#e9e3d6; border:1px solid var(--surface-line);
-    display:flex; align-items:center; justify-content:center; font-size:10px; font-family:var(--font-mono);
-    color:var(--ink-muted); cursor:pointer; transition:.15s;
-  }
-  .seat:hover{border-color:var(--marquee-dim);}
-  .seat.taken{background:#f0cdd0; color:#9c4750; cursor:not-allowed; opacity:.7;}
-  .seat.selected{background:var(--marquee); color:#1a1408; font-weight:700; border-color:var(--marquee);}
-  .legend-swatch{width:12px; height:12px; border-radius:3px; display:inline-block;}
-
-  /* ticket stub in modal */
-  .ticket-stub{
-    width:96px; background:repeating-linear-gradient(180deg, var(--void) 0 8px, transparent 8px 16px), var(--marquee);
-    background-size:100% 16px, 100% 100%; display:flex; align-items:center; justify-content:center;
-  }
-  .ticket-stub span{writing-mode:vertical-rl; font-family:var(--font-display); font-size:16px; letter-spacing:3px; color:#1a1408;}
-  .dashed-row{border-bottom:1px dashed var(--surface-line);}
-
-  .navbar{background:rgba(250,248,242,.92) !important; backdrop-filter:blur(8px); border-bottom:1px solid var(--surface-line);}
-</style>
-</head>
-<body>
-
+?>
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg sticky-top py-3">
   <div class="container">
@@ -113,8 +19,19 @@
         <li class="nav-item"><a class="nav-link" href="#history">ប្រវត្តិកក់</a></li>
       </ul>
       <div class="d-flex gap-2 mt-3 mt-lg-0">
-        <a href="../login.php" class="btn btn-outline-cinema px-3">ចូល / Login</a>
-        <a href="../register.php" class="btn btn-marquee px-3">ចុះឈ្មោះ</a>
+        <?php 
+        if(isset ($_SESSION['role'] )){ 
+          echo '<a href="../login.php" class="btn btn-outline-cinema px-3">ចូល / Login</a>
+          <a href="../register.php" class="btn btn-marquee px-3">ចុះឈ្មោះ</a>';
+          
+         }else{
+            echo '<a id="btnLogout" class="btn btn-danger px-3">ចេញ / Logout</a>';
+         }
+         if($_SESSION['user_role'] === 'admin'){
+          echo '<a href="../admin/dashboard.php" class="btn btn-primary border-0 px-3">Dashboard</a>';
+         }
+         ?>
+
       </div>
     </div>
   </div>
@@ -123,7 +40,7 @@
 
 <!-- HERO -->
 <section class="hero" id="top" style="hieght: 50vh; margin-top: -200px;">
-  <span class="ribbon">NOW SHOWING</span>
+  <!-- <span class="ribbon">NOW SHOWING</span> -->
   <div class="container pb-5 pt-5">
     <div class="text-marquee fw-bold small text-uppercase mb-2" style="letter-spacing:2px;">
       <i class="bi bi-circle-fill" style="font-size:8px;"></i> Room A · 7:30 PM Tonight
@@ -143,7 +60,7 @@
 
 <main class="container">
   <!-- SEARCH & FILTER -->
-  <div class="row g-3 py-5" id="movies">
+  <!-- <div class="row g-3 py-5" id="movies">
     <div class="col-md-6">
       <div class="input-group">
         <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
@@ -152,57 +69,48 @@
     </div>
     <div class="col-md-3">
       <select id="catFilter" class="form-select" onchange="liveSearch()">
-        <option value="">គ្រប់ប្រភេទ</option>
-        <option>Action</option><option>Horror</option><option>Comedy</option><option>Romance</option><option>Animation</option>
+        
       </select>
     </div>
-    <div class="col-md-3">
-      <select id="roomFilter" class="form-select" onchange="liveSearch()">
-        <option value="">គ្រប់បន្ទប់</option>
-        <option>Room A</option><option>Room B</option><option>VIP Room</option>
-      </select>
-    </div>
+
     <div class="col-12"><small class="text-muted" id="search-status"></small></div>
-  </div>
+  </div> -->
 
   <!-- MOVIE GRID -->
-  <div class="d-flex justify-content-between align-items-baseline mb-4">
+  <!-- <div class="d-flex justify-content-between align-items-baseline mb-4">
     <h2 class="font-display fs-1 mb-0">កំពុងបញ្ចាំង</h2>
     <span class="text-muted font-mono small" id="resultCount">6 movies</span>
-  </div>
-  <div class="row g-4 pb-5" id="movieGrid">
-    <div class="col-3">
-      <div class="card" >
-        <img src="../upload/image.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <p class="card-text">Some quick example t</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="card" >
-        <img src="../upload/image.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <p class="card-text">Some quick example t</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="card" >
-        <img src="../upload/image.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <p class="card-text">Some quick example t</p>
-        </div>
-      </div>
-    </div>
-  <div class="col-3">
-    <div class="card" >
-      <img src="../upload/image.png" class="card-img-top" alt="...">
-      <div class="card-body">
-        <p class="card-text">Some quick example t</p>
-      </div>
+  </div> -->
+  <!-- SEARCH & FILTER -->
+<div class="row g-3 py-5" id="movies">
+  <div class="col-md-6">
+    <div class="input-group">
+      <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+      <input type="text" id="movieSearch" class="form-control border-start-0" placeholder="ស្វែងរកភាពយន្ត... ឧ. Spi" oninput="liveSearch()">
     </div>
   </div>
+  <div class="col-md-3">
+    <select id="catFilter" class="form-select" onchange="liveSearch()">
+      <!-- Categories នឹង load ចូលទីនេះតាមរយៈ JS -->
+    </select>
+  </div>
+
+  <div class="col-12"><small class="text-muted" id="search-status"></small></div>
+</div>
+
+<!-- MOVIE GRID -->
+<div class="d-flex justify-content-between align-items-baseline mb-4">
+  <h2 class="font-display fs-1 mb-0">កំពុងបញ្ចាំង</h2>
+  <span class="text-muted font-mono small" id="resultCount">0 movies</span>
+</div>
+
+<div class="row g-4" id="catebody">
+  <div class="col-12 text-center py-5">
+    <div class="spinner-border text-warning" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</div>
 
   <div class="filmstrip my-2"></div>
 
@@ -304,6 +212,24 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('#btnLogout').click(function(){
+      $.ajax({
+        url: '../api/auth_handler.php',
+        method: 'POST',
+        dataType: 'json',
+        data: {action: 'logout'},
+        success: function(){
+          window.location.href = '../login.php';
+        }
+      })
+      
+    })
+  })
+
+</script>
+<script src="../js/client.js"> </script>
 
 </body>
 </html>

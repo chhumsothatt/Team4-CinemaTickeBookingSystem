@@ -184,7 +184,7 @@ $('#loginForm').on('submit', function (e) {
         },
         success: function (res) {
             if (res.success) {
-                window.location.href = res.role === 'admin' ? 'admin/index.php' : 'client/index.php';
+                window.location.href = res.role === 'admin' ? 'admin/dashboard.php' : 'client/index.php';
             } else {
                 $('#alertBox').html('<div class="alert alert-danger">' + res.message + '</div>');
             }
