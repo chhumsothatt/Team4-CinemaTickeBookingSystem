@@ -5,7 +5,7 @@
 $host = 'localhost';
 $dbname = 'team4_cinema';
 $username = 'root';
-$password = ''; // put your MySQL password here
+$password = '3326'; // put your MySQL password here
 
 try {
     $pdo = new PDO(
@@ -16,7 +16,9 @@ try {
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         ]
+        
     );
+    
 } catch (PDOException $e) {
     die(json_encode(['success' => false, 'message' => 'DB Connection failed: ' . $e->getMessage()]));
 }

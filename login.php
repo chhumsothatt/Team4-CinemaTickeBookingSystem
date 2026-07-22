@@ -190,6 +190,7 @@ $('#loginForm').on('submit', function (e) {
             }
         },
         error: function () {
+          console.log
             $('#alertBox').html('<div class="alert alert-danger">An unexpected error occurred. Please try again.</div>');
         }
     });
