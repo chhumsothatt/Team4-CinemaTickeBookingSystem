@@ -9,6 +9,7 @@ if (!$id) {
     echo json_encode(['status' => 'error', 'message' => 'Category ID is required']);
     exit;
 }
+ 
 
 try {
     $stmt = $pdo->prepare("DELETE FROM tbl_categories WHERE id = ?");

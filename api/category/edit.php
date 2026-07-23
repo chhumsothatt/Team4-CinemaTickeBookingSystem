@@ -2,19 +2,22 @@
 header('Content-Type: application/json');
 require_once '../../config/database.php';
 
+$data = json_decode(file_get_contents("php://input"), true);
+
+$id   = $data['id'] ?? null;
+$name = trim($data['name'] ?? '');
+
+if (!$id || empty($name)) {
+    echo json_encode(['status' => 'error', 'message' => 'Category ID and Name are required.']);
+    exit;
+}
+
+
 try {
-    // Make sure table names match your schema: tbl_categories and tbl_movies
-    $sql = "SELECT c.id, c.name, COUNT(m.id) AS movie_count 
-            FROM tbl_categories c 
-            LEFT JOIN tbl_movies m ON c.id = m.category_id 
-            GROUP BY c.id 
-            ORDER BY c.id DESC";
+    $stmt = $pdo->prepare("UPDATE tbl_categories SET name = ? WHERE id = ?");
+    $stmt->execute([$name, $id]);
 
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $categories = $stmt->fetchAll();
-
-    echo json_encode(['status' => 'success', 'data' => $categories]);
+    echo json_encode(['status' => 'success', 'message' => 'Category updated successfully']);
 } catch (PDOException $e) {
     echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
 }
