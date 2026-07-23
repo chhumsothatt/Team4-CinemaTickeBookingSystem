@@ -110,10 +110,10 @@
     <a class="nav-link active" href="../admin/dashboard.php" data-view="dashboard"><i class="bi bi-grid-1x2"></i> Dashboard</a>
 
     <div class="nav-section-label mt-3"> Movies</div>
-    <a class="nav-link" id="movie" href="../admin/movie.php" onclick="isClick()" data-view="movies"><i class="bi bi-film"></i> Movies</a>
-    <a class="nav-link" id="category" href="../admin/category.php" onclick="isClick()" data-view="categories"><i class="bi bi-tags"></i> Categories</a>
-    <a class="nav-link" id="room" href="../admin/room.php" onclick="isClick()" data-view="rooms"><i class="bi bi-door-open"></i> Cinema Rooms</a>
-    <a class="nav-link" id="showtime" href="../admin/showtime.php" onclick="isClick()" data-view="showtimes" ><i class="bi bi-clock-history"></i> Showtimes</a>
+    <a class="nav-link" id="movie" href="../admin/movie.php"><i class="bi bi-film"></i> Movies</a>
+    <a class="nav-link" id="category" href="../admin/category.php"><i class="bi bi-tags"></i> Categories</a>
+    <a class="nav-link" id="room" href="../admin/room.php"><i class="bi bi-door-open"></i> Cinema Rooms</a>
+    <a class="nav-link" id="showtime" href="../admin/showtime.php"><i class="bi bi-clock-history"></i> Showtimes</a>
 
     <div class="nav-section-label mt-3">Reports</div>
     <a class="nav-link" href="../admin/book_history.php" data-view="bookings"><i class="bi bi-ticket-perforated"></i> Booking History</a>

@@ -1,8 +1,9 @@
 <?php 
 session_start();
 include("../include/header.php");
-
+include("../include/navbar.php");
 ?>
+<<<<<<< HEAD
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg sticky-top py-3">
   <div class="container">
@@ -32,11 +33,9 @@ include("../include/header.php");
           echo '<a href="../admin/dashboard.php" class="btn btn-primary border-0 px-3">Dashboard</a>';
          }
          ?>
+=======
+>>>>>>> 7e8816381c1bd2ef16771877dc6c71f9214439cb
 
-      </div>
-    </div>
-  </div>
-</nav>
 <div class="filmstrip"></div>
 
 <!-- HERO -->
@@ -53,37 +52,15 @@ include("../include/header.php");
       <span>Release <strong class="text-dark">25/07/2026</strong></span>
     </div>
     <div class="d-flex gap-2">
-      <a href="#booking" class="btn btn-velvet btn-lg px-4">កក់សំបុត្រឥឡូវនេះ</a>
+      <a href="booking.php" class="btn btn-velvet btn-lg px-4">កក់សំបុត្រឥឡូវនេះ</a>
       <button class="btn btn-outline-cinema btn-lg px-4">មើល Trailer</button>
     </div>
   </div>
 </section>
 
 <main class="container">
-  <!-- SEARCH & FILTER -->
-  <!-- <div class="row g-3 py-5" id="movies">
-    <div class="col-md-6">
-      <div class="input-group">
-        <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
-        <input type="text" id="movieSearch" class="form-control border-start-0" placeholder="ស្វែងរកភាពយន្ត... ឧ. Spi" oninput="liveSearch()">
-      </div>
-    </div>
-    <div class="col-md-3">
-      <select id="catFilter" class="form-select" onchange="liveSearch()">
-        
-      </select>
-    </div>
 
-    <div class="col-12"><small class="text-muted" id="search-status"></small></div>
-  </div> -->
-
-  <!-- MOVIE GRID -->
-  <!-- <div class="d-flex justify-content-between align-items-baseline mb-4">
-    <h2 class="font-display fs-1 mb-0">កំពុងបញ្ចាំង</h2>
-    <span class="text-muted font-mono small" id="resultCount">6 movies</span>
-  </div> -->
-  <!-- SEARCH & FILTER -->
-<div class="row g-3 py-5" id="movies">
+<div class="row g-3 py-5" >
   <div class="col-md-6">
     <div class="input-group">
       <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
@@ -92,7 +69,7 @@ include("../include/header.php");
   </div>
   <div class="col-md-3">
     <select id="catFilter" class="form-select" onchange="liveSearch()">
-      <!-- Categories នឹង load ចូលទីនេះតាមរយៈ JS -->
+
     </select>
   </div>
 
@@ -102,7 +79,9 @@ include("../include/header.php");
 <!-- MOVIE GRID -->
 <div class="d-flex justify-content-between align-items-baseline mb-4">
   <h2 class="font-display fs-1 mb-0">កំពុងបញ្ចាំង</h2>
+
   <span class="text-muted font-mono small" id="resultCount">0 movies</span>
+
 </div>
 
 <div class="row g-4" id="catebody">
@@ -116,7 +95,7 @@ include("../include/header.php");
   <div class="filmstrip my-2"></div>
 
   <!-- BOOKING PANEL -->
-  <section class="py-5" id="booking">
+  <section class="py-5" >
     <h2 class="font-display fs-1 mb-4">ជ្រើសរើសកៅអី</h2>
     <div class="card border shadow-sm p-3 p-md-4" style="border-color:var(--surface-line);">
       <div class="row g-4 mb-4">

@@ -1,6 +1,5 @@
 const API = '../api/client/';
 
-// 1. Function ទាញយកភាពយន្ត (Movies)
 function getMovie() {
     const keyword = $('#movieSearch').val().trim();
     const categoryId = $('#catFilter').val();
@@ -13,12 +12,11 @@ function getMovie() {
             category_id: categoryId
         },
         dataType: 'json',
-        success: function(res) {
+        success: function (res) {
             const $catebody = $('#catebody');
             $catebody.empty();
-            
+
             if (res.success && res.data && res.data.length > 0) {
-                // អាប់ដេតចំនួនភាពយន្ត
                 $('#resultCount').text(`${res.data.length} movies`);
 
                 $.each(res.data, function (index, movie) {
@@ -27,7 +25,9 @@ function getMovie() {
                     $catebody.append(`
                         <div class="col-md-3 col-sm-6">
                             <div class="card movie-card shadow-sm h-100">
-                                <img src="${posterImg}" class="card-img-top"  style="height: 230px; object-fit: cover;">
+                                <a href="./detail.php?movie_id=${movie.id}" >
+                                    <img src="${posterImg}" class="card-img-top"  style="height: 230px; object-fit: cover;">
+                                </a>
                                 <div class="card-body d-flex flex-column justify-content-between">
                                     <div>
                                         <div class="d-flex align-items-center mb-1">
@@ -36,11 +36,11 @@ function getMovie() {
                                         </div>
                                         <span class="badge bg-secondary mb-2">${movie.category_name}</span>
                                     </div>
-                                    <a href="#booking" onclick="selectMovie(${movie.id})" class="btn btn-marquee w-100 mt-2">កក់សំបុត្រ</a>
+                                    <a href="./detail.php?movie_id=${movie.id}" class="btn btn-marquee w-100 mt-2">កក់សំបុត្រ</a>
                                 </div>
                             </div>
                         </div>
-                    `);  
+                    `);
                 });
             } else {
                 $('#resultCount').text('0 movies');
@@ -52,7 +52,7 @@ function getMovie() {
                 `);
             }
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             console.error("AJAX Error Details:", xhr.responseText);
             $('#resultCount').text('0 movies');
             $('#catebody').html(`
@@ -77,11 +77,11 @@ const getCategory = () => {
         url: API + 'getcategory.php',
         method: 'GET',
         dataType: 'json',
-        success: function(res) {
+        success: function (res) {
             let categoryElement = $('#catFilter');
             categoryElement.empty();
             categoryElement.append(`<option value="">All Categories</option>`);
-            
+
             if (res.success && res.data.length > 0) {
                 $.each(res.data, function (index, category) {
                     categoryElement.append(`
@@ -90,11 +90,130 @@ const getCategory = () => {
                 });
             }
         },
-        
+
     });
 };
 
-$(document).ready(function() {
+$(document).ready(function () {
+    // Detect if we are on detail.php page
+    if (window.location.pathname.includes('detail.php')) {
+        getMovieDetail();
+    }
+
+    // Logout handling
+    $('#btnLogout').click(function () {
+        $.ajax({
+            url: '../api/auth_handler.php',
+            method: 'POST',
+            dataType: 'json',
+            data: { action: 'logout' },
+            success: function () {
+                window.location.href = '../login.php';
+            }
+        });
+    });
+});
+
+/**
+ * Fetch movie details from backend API based on URL parameters
+ */
+function getMovieDetail() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const movieId = urlParams.get('movie_id');
+
+    if (!movieId) {
+        alert('សូមជ្រើសរើសភាពយន្តជាមុនសិន!');
+        window.location.href = './index.php';
+        return;
+    }
+
+    $.ajax({
+        url: '../api/client/getdetail.php',
+        method: 'GET',
+        data: { movie_id: movieId },
+        dataType: 'json',
+        success: function (response) {
+            if (response.success) {
+                const movie = response.movie;
+                const showtimes = response.showtimes;
+
+                // Render basic info
+                $('#movieTitle').text(movie.title);
+                $('#mModalTitle').text(movie.title);
+                $('#movieDesc').text(movie.description || 'មិនទាន់មានការពិពណ៌នា។');
+                $('#movieCategory').text(movie.category_name || 'General');
+                $('#movieDuration').text((movie.duration_minutes || '0') + ' នាទី');
+                
+                // Poster Image Fix
+                const posterPath = movie.poster ? `../upload/${movie.poster}` : '../upload/image.png';
+                $('#moviePoster').attr('src', posterPath);
+
+                // Render Showtimes
+                renderShowtimes(showtimes);
+            } else {
+                alert(response.message);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('API Error:', error);
+            alert('មានបញ្ហាក្នុងការទាញយកទិន្នន័យពី Server!');
+        }
+    });
+}
+
+/**
+ * Render dynamic radio buttons for movie showtimes
+ */
+function renderShowtimes(showtimes) {
+    const $container = $('#showtimesContainer');
+    $container.empty();
+
+    if (!showtimes || showtimes.length === 0) {
+        $container.html('<p class="text-muted">មិនទាន់មានបញ្ចាំងនៅឡើយទេ។</p>');
+        return;
+    }
+
+    // Update Room tag from first showtime if available
+    if (showtimes[0].room_name) {
+        $('#movieRoom').text(showtimes[0].room_name);
+        $('#mModalRoom').text(showtimes[0].room_name);
+    }
+
+    showtimes.forEach((st, index) => {
+        const isChecked = index === 0 ? 'checked' : '';
+        const radioHtml = `
+            <input type="radio" class="btn-check" name="showtime" id="st_${st.id}" value="${st.id}" data-time="${st.show_time}" data-date="${st.show_date}" data-price="${st.price}" ${isChecked}>
+            <label class="btn btn-outline-cinema font-mono" for="st_${st.id}">${st.show_time}</label>
+        `;
+        $container.append(radioHtml);
+    });
+
+    // Set initial values for Modal
+    const selected = $('input[name="showtime"]:checked');
+    if (selected.length > 0) {
+        $('#tTime').text(selected.data('time'));
+        $('#mModalDate').text(selected.data('date'));
+    }
+}
+
+// Update modal details on showtime change
+$(document).on('change', 'input[name="showtime"]', function () {
+    $('#tTime').text($(this).data('time'));
+    $('#mModalDate').text($(this).data('date'));
+});
+
+function confirmBooking() {
+    const selectedShowtime = $('input[name="showtime"]:checked').val();
+    if (!selectedShowtime) {
+        alert('សូមជ្រើសរើសម៉ោងបញ្ចាំង!');
+        return;
+    }
+    // Perform booking logic here
+}
+
+$(document).ready(function () {
     getCategory();
     getMovie();
 });
+
+
