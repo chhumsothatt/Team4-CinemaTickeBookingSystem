@@ -25,7 +25,8 @@
       <div class="card p-4 shadow-sm border-0">
         <h3 class="mb-4">Showtime Details</h3>
         
-        <form id="createTimeForm">
+        <!-- 💡 បន្ថែម method="POST" ការពារ Submit តាម GET -->
+        <form id="createTimeForm" method="POST">
           
           <!-- Dropdown Movie -->
           <div class="mb-3">
@@ -69,11 +70,11 @@
 
           <!-- Action Buttons -->
           <div class="d-flex justify-content-end gap-2 mt-4">
-          <a href="showtime.php" class="btn btn-outline-secondary">Cancel</a>
-          <button type="submit" class="btn btn-marquee">
-         <i class="bi bi-save"></i> Save Showtime
-        </button>
-</div>
+            <a href="showtime.php" class="btn btn-outline-secondary">Cancel</a>
+            <button type="submit" class="btn btn-marquee">
+              <i class="bi bi-save"></i> Save Showtime
+            </button>
+          </div>
 
         </form>
 
