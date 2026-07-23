@@ -12,6 +12,7 @@ if (!$id || empty($name)) {
     exit;
 }
 
+
 try {
     $stmt = $pdo->prepare("UPDATE tbl_categories SET name = ? WHERE id = ?");
     $stmt->execute([$name, $id]);

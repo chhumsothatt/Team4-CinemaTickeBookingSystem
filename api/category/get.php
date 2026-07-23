@@ -10,6 +10,7 @@ try {
             GROUP BY c.id 
             ORDER BY c.id DESC";
 
+
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $categories = $stmt->fetchAll();

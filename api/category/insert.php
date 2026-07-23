@@ -13,6 +13,7 @@ try {
     $stmt = $pdo->prepare("INSERT INTO tbl_categories (name) VALUES (?)");
     $stmt->execute([$name]);
 
+    
     echo json_encode(['status' => 'success', 'message' => 'Category created successfully']);
 } catch (PDOException $e) {
     echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
