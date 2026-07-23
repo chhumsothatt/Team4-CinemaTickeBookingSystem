@@ -1,5 +1,80 @@
 $(document).ready(function() {
-    loadRooms();
+
+    // ------------------------------------
+    // ១. ទាញទិន្នន័យចាស់មកដាក់ Form Edit (ពេលបើក editRoom.php)
+    // ------------------------------------
+    if ($('#editRoomForm').length > 0) {
+        let roomId = $('#room_id').val();
+        if (roomId) {
+            $.ajax({
+                url: '../api/room/get.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success && response.data) {
+                        let room = response.data.find(r => r.id == roomId);
+                        if (room) {
+                            $('#room_name').val(room.room_name);
+                            $('#total_seats').val(room.total_seats);
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    // ------------------------------------
+    // ២. Action ពេល Submit បង្កើតបន្ទប់ (createRoom.php)
+    // ------------------------------------
+    $(document).on('submit', '#addRoomForm', function(e) {
+        e.preventDefault(); // 💡 សំខាន់បំផុត! ការពារកុំឱ្យលោតទិន្នន័យលើ URL
+
+        $.ajax({
+            url: '../api/room/insert.php',
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function(res) {
+                alert(res.message);
+                if (res.success) {
+                    window.location.href = 'room.php'; // ជោគជ័យ ឱ្យរត់ទៅទំព័រ room.php
+                }
+            },
+            error: function(xhr) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    });
+
+    // ------------------------------------
+    // ៣. Action ពេល Submit កែប្រែបន្ទប់ (editRoom.php)
+    // ------------------------------------
+    $(document).on('submit', '#editRoomForm', function(e) {
+        e.preventDefault(); // 💡 សំខាន់បំផុត! ការពារកុំឱ្យលោតទិន្នន័យលើ URL
+
+        $.ajax({
+            url: '../api/room/edit.php',
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function(res) {
+                alert(res.message);
+                if (res.success) {
+                    window.location.href = 'room.php'; // ជោគជ័យ ឱ្យរត់ទៅទំព័រ room.php
+                }
+            },
+            error: function(xhr) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    });
+
+    // ------------------------------------
+    // ៤. ទាញយកបញ្ជីបន្ទប់មកបង្ហាញក្នុង Table (room.php)
+    // ------------------------------------
+    if ($('#room_table_body').length > 0) {
+        loadRooms();
+    }
 
     function loadRooms() {
         $.ajax({
@@ -9,7 +84,7 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.success) {
                     let rows = '';
-                    if (response.data.length > 0) {
+                    if (response.data && response.data.length > 0) {
                         response.data.forEach(room => {
                             rows += `
                                 <tr>
@@ -27,7 +102,7 @@ $(document).ready(function() {
                             `;
                         });
                     } else {
-                        rows = '<tr><td colspan="3" class="text-center">No rooms found</td></tr>';
+                        rows = '<tr><td colspan="3" class="text-center py-3 text-muted">No rooms found</td></tr>';
                     }
                     $('#room_table_body').html(rows);
                 }
@@ -35,7 +110,9 @@ $(document).ready(function() {
         });
     }
 
-    // Delete Room
+    // ------------------------------------
+    // ៥. លុบบន្ទប់ (Delete Room)
+    // ------------------------------------
     $(document).on('click', '.btn-delete-room', function() {
         let id = $(this).data('id');
         if (confirm('Are you sure you want to delete this room?')) {
@@ -51,5 +128,5 @@ $(document).ready(function() {
             });
         }
     });
-});
 
+});

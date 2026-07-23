@@ -2,39 +2,28 @@
 header('Content-Type: application/json');
 require_once '../../config/database.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $room_name   = trim($_POST['room_name'] ?? '');
-    $total_seats = intval($_POST['total_seats'] ?? 0);
+try {
+    $room_name   = $_POST['room_name'] ?? '';
+    $total_seats = $_POST['total_seats'] ?? 0;
 
-    if (!empty($room_name) && $total_seats > 0) {
-        try {
-            // កែសម្រួលមកប្រើ tbl_cinema_rooms
-            $stmt = $pdo->prepare("INSERT INTO tbl_cinema_rooms (room_name, total_seats) VALUES (:room_name, :total_seats)");
-            $stmt->execute([
-                ':room_name'   => $room_name,
-                ':total_seats' => $total_seats
-            ]);
-
-            echo json_encode([
-                'success' => true,
-                'message' => 'Cinema room created successfully!'
-            ]);
-        } catch (PDOException $e) {
-            echo json_encode([
-                'success' => false,
-                'message' => 'Error: ' . $e->getMessage()
-            ]);
-        }
-    } else {
-        echo json_encode([
-            'success' => false,
-            'message' => 'Please fill in all required fields properly.'
-        ]);
+    if (empty($room_name) || empty($total_seats)) {
+        echo json_encode(['success' => false, 'message' => 'Please fill in all fields!']);
+        exit;
     }
-} else {
-    echo json_encode([
-        'success' => false,
-        'message' => 'Invalid request method.'
+
+    $sql = "INSERT INTO tbl_cinema_rooms (room_name, total_seats) VALUES (:room_name, :total_seats)";
+    $stmt = $pdo->prepare($sql);
+    $result = $stmt->execute([
+        ':room_name'   => $room_name,
+        ':total_seats' => $total_seats
     ]);
+
+    if ($result) {
+        echo json_encode(['success' => true, 'message' => 'Room added successfully!']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Failed to add room.']);
+    }
+} catch (PDOException $e) {
+    echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
 }
 ?>

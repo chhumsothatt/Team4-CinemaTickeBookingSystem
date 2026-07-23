@@ -2,21 +2,24 @@
 header('Content-Type: application/json');
 require_once '../../config/database.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = intval($_POST['id'] ?? 0);
+try {
+    $id = $_POST['id'] ?? '';
 
-    if ($id > 0) {
-        try {
-            $stmt = $pdo->prepare("DELETE FROM tbl_cinema_rooms WHERE id = :id");
-            $stmt->execute([':id' => $id]);
-
-            echo json_encode(['success' => true, 'message' => 'Room deleted successfully!']);
-        } catch (PDOException $e) {
-            echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
-        }
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Invalid ID.']);
+    if (empty($id)) {
+        echo json_encode(['success' => false, 'message' => 'Invalid ID!']);
+        exit;
     }
+
+    $sql = "DELETE FROM tbl_cinema_rooms WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    $result = $stmt->execute([':id' => $id]);
+
+    if ($result) {
+        echo json_encode(['success' => true, 'message' => 'Room deleted successfully!']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Failed to delete room.']);
+    }
+} catch (PDOException $e) {
+    echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
 }
 ?>
-

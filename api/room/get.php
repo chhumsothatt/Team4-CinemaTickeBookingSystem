@@ -3,7 +3,8 @@ header('Content-Type: application/json');
 require_once '../../config/database.php';
 
 try {
-    $stmt = $pdo->query("SELECT id, room_name, total_seats FROM tbl_cinema_rooms ORDER BY id DESC");
+    $sql = "SELECT * FROM tbl_cinema_rooms ORDER BY id DESC";
+    $stmt = $pdo->query($sql);
     $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     echo json_encode([
