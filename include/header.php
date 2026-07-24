@@ -25,6 +25,9 @@
     --font-display:'Bebas Neue','Noto Sans Khmer',sans-serif;
     --font-mono:'JetBrains Mono', monospace;
   }
+  .nav-link.active {
+    color: #C9932E !important;
+  }
   .btn-primary{
     background-color: #C9932E !important;
   }
