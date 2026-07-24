@@ -8,9 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $show_date    = $_POST['show_date'] ?? '';
     $start_time   = $_POST['start_time'] ?? '';
     $end_time     = $_POST['end_time'] ?? '';
-    $ticket_price = floatval($_POST['price'] ?? 0);
+    $ticket_price = floatval($_POST['price'] ?? 0); // 💡 ត្រូវប្រាកដថាប្រើ $_POST['price']
 
-    // បូកបញ្ចូល Date + Time ឱ្យត្រូវតាម DATETIME format (YYYY-MM-DD HH:MM:SS)
     $full_start_time = $show_date . ' ' . $start_time . ':00';
     $full_end_time   = $show_date . ' ' . $end_time . ':00';
 
@@ -33,13 +32,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (PDOException $e) {
             echo json_encode([
                 'success' => false,
-                'message' => 'Error: ' . $e->getMessage()
+                'message' => 'Database Error: ' . $e->getMessage()
             ]);
         }
     } else {
         echo json_encode([
             'success' => false,
-            'message' => 'Please fill in all required fields.'
+            'message' => 'Please fill in all required fields accurately.'
         ]);
     }
 } else {

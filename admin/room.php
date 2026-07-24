@@ -4,7 +4,7 @@
   <div class="d-flex justify-content-between align-items-center mb-2">
     <div>
       <h2 class="font-display fw-bold mb-0 text-uppercase">Cinema Rooms</h2>
-      <div class="text-muted small">គ្រប់គ្រងបន្ទប់ចាំងភាពយន្តទាំងអស់</div>
+      <div class="text-muted small">គ្រប់គ្រងបន្ទប់បញ្ចាំងភាពយន្តទាំងអស់</div>
     </div>
    
 <a href="createRoom.php" class="btn btn-warning text-white" style="background-color: #d97706; border: none;">
