@@ -5,7 +5,7 @@
 $host = 'localhost';
 $dbname = 'team4_cinema';
 $username = 'root';
-$password = ''; // put your MySQL password here
+$password = '3326'; // put your MySQL password here
 
 try {
     $pdo = new PDO(
