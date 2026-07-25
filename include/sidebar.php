@@ -92,31 +92,29 @@
     .main-content{margin-left:0;}
   }
 </style>
-
-
 </head>
 <body>
 
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
   <div class="brand d-flex align-items-center gap-2 font-display fs-3">
-    <a href="../client/index.php" class="nav-link">
-      <span class="bulb"></span><span class="text-marquee">CINÉ</span><span class="fs-6 fw-normal">ADMIN</span>
+    <a href="../client/index.php" class="text-decoration-none d-flex align-items-center gap-2">
+      <span class="bulb"></span><span class="text-marquee">CINÉ</span><span class="fs-6 fw-normal text-dark">ADMIN</span>
     </a>
   </div>
 
   <nav class="nav flex-column p-2 pt-3">
     <div class="nav-section-label">Overview</div>
-    <a class="nav-link active" href="../admin/dashboard.php" data-view="dashboard"><i class="bi bi-grid-1x2"></i> Dashboard</a>
+    <a class="nav-link" href="../admin/dashboard.php"><i class="bi bi-grid-1x2"></i> Dashboard</a>
 
-    <div class="nav-section-label mt-3"> Movies</div>
+    <div class="nav-section-label mt-3">Movies</div>
     <a class="nav-link" id="movie" href="../admin/movie.php"><i class="bi bi-film"></i> Movies</a>
     <a class="nav-link" id="category" href="../admin/category.php"><i class="bi bi-tags"></i> Categories</a>
     <a class="nav-link" id="room" href="../admin/room.php"><i class="bi bi-door-open"></i> Cinema Rooms</a>
     <a class="nav-link" id="showtime" href="../admin/showtime.php"><i class="bi bi-clock-history"></i> Showtimes</a>
 
     <div class="nav-section-label mt-3">Reports</div>
-    <a class="nav-link" href="../admin/book_history.php" data-view="bookings"><i class="bi bi-ticket-perforated"></i> Booking History</a>
+    <a class="nav-link" href="../admin/book_history.php"><i class="bi bi-ticket-perforated"></i> Booking History</a>
   </nav>
 
   <div class="sidebar-footer">
@@ -129,8 +127,26 @@
   </div>
 
 </aside>
+
 <script>
-    $(document).ready(function(){
+  $(document).ready(function(){
+    // --- Active Link Highlight Logic ---
+    let currentFile = window.location.pathname.split('/').pop();
+    if (!currentFile) currentFile = 'dashboard.php';
+
+    $('.sidebar .nav-link').each(function(){
+      let href = $(this).attr('href');
+      if (href) {
+        let linkFile = href.split('/').pop();
+        if (linkFile === currentFile) {
+          $(this).addClass('active');
+        } else {
+          $(this).removeClass('active');
+        }
+      }
+    });
+
+    // --- Logout Handler ---
     $('#btnLogout').click(function(){
       $.ajax({
         url: '../api/auth_handler.php',
@@ -140,9 +156,7 @@
         success: function(){
           window.location.href = '../login.php';
         }
-      })
-      // alert(123);
-      
-    })
-  })
+      });
+    });
+  });
 </script>

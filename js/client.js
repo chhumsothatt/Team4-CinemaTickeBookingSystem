@@ -31,7 +31,7 @@ function getMovie() {
                                 <div class="card-body d-flex flex-column justify-content-between">
                                     <div>
                                         <div class="d-flex align-items-center mb-1">
-                                            <h6 class="card-title font-display fs-6 mb-0 text-truncate me-2" title="${movie.title}">${movie.title}</h6>
+                                            <h6 class="card-title font-display fs-6 mb-0 text-truncate me-2" title="${movie.title}">Title : ${movie.title}</h6>
                                             <span class="font-display fs-6 ms-auto text-danger text-nowrap">${movie.duration_minutes} នាទី</span>
                                         </div>
                                         <span class="badge bg-secondary mb-2">${movie.category_name}</span>
@@ -143,7 +143,7 @@ function getMovieDetail() {
                 $('#movieDesc').text(movie.description || 'មិនទាន់មានការពិពណ៌នា។');
                 $('#movieCategory').text(movie.category_name || 'General');
                 $('#movieDuration').text((movie.duration_minutes || '0') + ' នាទី');
-                
+
                 // Poster Image Fix
                 const posterPath = movie.poster ? `../upload/${movie.poster}` : '../upload/image.png';
                 $('#moviePoster').attr('src', posterPath);

@@ -1,3 +1,8 @@
+
+CREATE DATABASE IF NOT EXISTS team4_cinema CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+USE team4_cinema;
+
 -- 1. Categories Table
 CREATE TABLE tbl_categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -11,7 +16,7 @@ CREATE TABLE tbl_movies (
     category_id INT NOT NULL,
     title VARCHAR(200) NOT NULL,
     description TEXT,
-    poster VARCHAR(200), ~
+    poster VARCHAR(200), 
     duration_minutes INT NOT NULL,
     release_date DATE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -43,7 +48,7 @@ CREATE TABLE tbl_showtimes (
 -- 5. Seats Table
 CREATE TABLE tbl_seats (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    room_id INT NOT NULL,~
+    room_id INT NOT NULL,
     seat_row VARCHAR(200) NOT NULL,
     seat_number INT NOT NULL,      
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
