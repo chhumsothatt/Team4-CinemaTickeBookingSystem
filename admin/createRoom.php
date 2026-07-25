@@ -4,7 +4,7 @@
   <div class="d-flex justify-content-between align-items-center mb-2">
     <div>
       <h2 class="font-display fw-bold mb-0 text-uppercase">Create Cinema Room</h2>
-      <div class="text-muted small">បន្ថែមបន្ទប់ចាំងភាពយន្តថ្មី</div>
+      <div class="text-muted small">បន្ថែមបន្ទប់បញ្ចាំងភាពយន្តថ្មី</div>
     </div>
     <a href="room.php" class="btn btn-secondary px-3">&larr; Back</a>
   </div>

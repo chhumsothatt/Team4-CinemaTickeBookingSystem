@@ -27,7 +27,7 @@ $(document).ready(function() {
     // ២. Action ពេល Submit បង្កើតបន្ទប់ (createRoom.php)
     // ------------------------------------
     $(document).on('submit', '#addRoomForm', function(e) {
-        e.preventDefault(); // 💡 សំខាន់បំផុត! ការពារកុំឱ្យលោតទិន្នន័យលើ URL
+        e.preventDefault(); //  ការពារកុំឱ្យលោតទិន្នន័យលើ URL
 
         $.ajax({
             url: '../api/room/insert.php',
@@ -111,7 +111,7 @@ $(document).ready(function() {
     }
 
     // ------------------------------------
-    // ៥. លុบบន្ទប់ (Delete Room)
+    //  (Delete Room)
     // ------------------------------------
     $(document).on('click', '.btn-delete-room', function() {
         let id = $(this).data('id');

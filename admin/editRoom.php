@@ -4,7 +4,7 @@
   <div class="d-flex justify-content-between align-items-center mb-2">
     <div>
       <h2 class="font-display fw-bold mb-0 text-uppercase">Edit Cinema Room</h2>
-      <div class="text-muted small">កែប្រែព័ត៌មានបន្ទប់ចាំងភាពយន្ត</div>
+      <div class="text-muted small">កែប្រែព័ត៌មានបន្ទប់បញ្ចាំងភាពយន្ត</div>
     </div>
     <a href="room.php" class="btn btn-secondary px-3">&larr; Back</a>
   </div>
