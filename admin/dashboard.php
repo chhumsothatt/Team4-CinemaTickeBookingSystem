@@ -58,18 +58,18 @@
         </div>
       </div>
       <div class="row g-3 mb-4">
-        <div class="col-12 col-xl-6">
-        <div style="width: 600px; height: 300px;">
+        <div class="col-6 ">
           <canvas id="myChart"></canvas>
+
         </div>
-      </div>
-        <div class="col-6 col-xl-6">
+        <div class="col-6">
           <div class="stat-card card p-3" style="--accent:var(--ok)">
             <div class="text-muted small text-uppercase mb-2">Total Price</div>
             <div class="value"  id="statTotalPrice">0</div>
             <div class="delta"><i class="bi bi-arrow-up-short"></i><span id="statRevenueThisWeek">0</span>  this week</div>
           </div>
         </div>
+      </div>
       </div>
 
     </div>
