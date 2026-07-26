@@ -9,13 +9,15 @@ requireAuthPage();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Controller — CINÉ MARQUEE</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+Khmer:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <script src="../jquery/jquery-3.7.1.min.js"></script>
+  <link rel="icon" type="image/png" href="../team/logo.png">
+  <title>ETEC CINEMA</title>
+
+
   <style>
     :root {
       --void: #faf8f2;
@@ -322,8 +324,9 @@ requireAuthPage();
 
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
-    <div class="brand d-flex align-items-center gap-2 font-display fs-3">
+    <div class="brand d-flex align-items-center gap-2 font-display fs-3 py-2">
       <a href="../client/index.php" class="text-decoration-none d-flex align-items-center gap-2">
+        <img src="../team/logo.png" alt="ETEC CINEMA Logo" height="70" class="d-inline-block align-text-top rounded-circle">
         <span class="bulb"></span><span class="text-marquee">ADMIN</span><span class="fs-6 fw-normal text-dark"></span>
       </a>
     </div>

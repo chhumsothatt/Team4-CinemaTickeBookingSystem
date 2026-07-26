@@ -84,7 +84,7 @@ function renderShowtimes(showtimes) {
                 <label class="showtime-card-label" for="st_${st.id}">
                     <div class="fw-bold text-primary fs-5">${timeDisplay}</div>
                     <div class="small text-muted fw-semibold">${st.room_name}</div>
-                    <div class="badge bg-light text-dark border mt-1">$${priceDisplay}</div>
+                    <div class=" bg-light text-danger border mt-1 d-none">$${priceDisplay}</div>
                 </label>
             </div>
         `;

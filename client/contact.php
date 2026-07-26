@@ -12,7 +12,7 @@ include("../include/navbar.php");
   <!-- PAGE HEADER -->
   <section class="py-5">
     <h2 class="font-display fs-1 mb-2">ទំនាក់ទំនង</h2>
-    <p class="text-muted mb-0">មានចម្ងល់ ឬត្រូវការជំនួយ? ក្រុមការងារ CINÉ MARQUEE រង់ចាំទទួលសាររបស់អ្នក។</p>
+    <p class="text-muted mb-0">មានចម្ងល់ ឬត្រូវការជំនួយ? ក្រុមការងារ ETEC CINEMA រង់ចាំទទួលសាររបស់អ្នក។</p>
   </section>
 
   <!-- CONTACT INFO CARDS -->
@@ -42,7 +42,7 @@ include("../include/navbar.php");
             <i class="bi bi-envelope-fill"></i>
           </div>
           <h5 class="font-display fs-4 mb-2">អ៊ីមែល</h5>
-          <p class="text-muted small mb-0 font-mono">support@cinemarquee.com</p>
+          <p class="text-muted small mb-0 font-mono">support@gmail.com</p>
         </div>
       </div>
     </div>

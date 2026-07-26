@@ -9,17 +9,17 @@ $team = [
   [
     "name"  => "ឈំ សុថាត់",
     "role"  => "Team Leader",
-    "photo" => "../team/st.png",
+    "photo" => "../team/sothatt.png",
   ],
   [
-    "name"  => "រី រះស្មី",
+    "name"  => "ទូច ច័ន្ទរស្មី",
     "role"  => "Team Member",
-    "photo" => "../team/member1.png",
+    "photo" => "../team/reaksmey.png",
   ],
   [
     "name"  => "ថេន​ ពុធា",
     "role"  => "Team Member",
-    "photo" => "../team/th.png",
+    "photo" => "../team/puthea.png",
   ],
 ];
 ?>

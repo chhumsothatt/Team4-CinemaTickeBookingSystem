@@ -1,8 +1,9 @@
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg sticky-top py-3">
+<nav class="navbar navbar-expand-lg sticky-top py-0">
   <div class="container">
     <a class="navbar-brand font-display fs-3 d-flex align-items-center gap-2" href="index.php">
-      <span class="bulb"></span><span class="text-marquee">ETEC</span><span class="fs-6 fw-normal ms-1">CINEMA</span>
+      <img src="../team/logo.png" alt="ETEC CINEMA Logo" height="70" class="d-inline-block align-text-top rounded-circle">
+      <span class="bulb"></span>CINEMA</span>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
       <span class="navbar-toggler-icon"></span>
