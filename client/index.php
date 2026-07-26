@@ -133,10 +133,7 @@ include("../include/navbar.php");
     </div>
   </section>
 </main>
-
-<footer class="text-center text-muted small py-5 border-top" style="border-color:var(--surface-line) !important;">
-  © 2026 ETEC CINEMA — Cinema Ticket Booking System · Team 4
-</footer>
+<?php include('../include/footer.php'); ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>

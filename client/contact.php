@@ -18,31 +18,24 @@ include("../include/navbar.php");
   <!-- CONTACT INFO CARDS -->
   <section class="pb-5">
     <div class="row g-4">
-      <div class="col-12 col-md-4">
-        <div class="card border h-100 shadow-sm p-4 text-center" style="border-color:var(--surface-line);">
-          <div class="text-marquee fs-2 mb-2">
-            <i class="bi bi-geo-alt-fill"></i>
+      <div class="col-12 col-md-6">
+        <a href="https://t.me/+2gEnLVh7ItxmYTg9" class="nav-link" target="_blank">
+          <div class="card border h-100 shadow-sm p-4 text-center" style="border-color:var(--surface-line);">
+            <div class="text-marquee fs-2 mb-2">
+              <i class="bi bi-telegram"></i>
+            </div>
+            <h5 class="font-display fs-4 mb-2 nav-link">តេឡេក្រាម</h5>
+            <p class="text-muted small mb-0 nav-link">@ETEC-CINEMA-MOVIE</p>
           </div>
-          <h5 class="font-display fs-4 mb-2">អាសយដ្ឋាន</h5>
-          <p class="text-muted small mb-0">ផ្លូវលេខ ១៦៩, សង្កាត់ទួលទំពូង<br>ខណ្ឌចំការមន, ភ្នំពេញ</p>
-        </div>
+        </a>
       </div>
-      <div class="col-12 col-md-4">
-        <div class="card border h-100 shadow-sm p-4 text-center" style="border-color:var(--surface-line);">
-          <div class="text-marquee fs-2 mb-2">
-            <i class="bi bi-telephone-fill"></i>
-          </div>
-          <h5 class="font-display fs-4 mb-2">លេខទូរស័ព្ទ</h5>
-          <p class="text-muted small mb-0 font-mono">+855 12 345 678<br>+855 96 789 012</p>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-md-6">
         <div class="card border h-100 shadow-sm p-4 text-center" style="border-color:var(--surface-line);">
           <div class="text-marquee fs-2 mb-2">
             <i class="bi bi-envelope-fill"></i>
           </div>
           <h5 class="font-display fs-4 mb-2">អ៊ីមែល</h5>
-          <p class="text-muted small mb-0 font-mono">support@gmail.com</p>
+          <p class="text-muted small mb-0 font-mono">etec_cinema@gmail.com</p>
         </div>
       </div>
     </div>
@@ -142,10 +135,7 @@ include("../include/navbar.php");
   <div class="filmstrip my-2"></div>
 
 </main>
-
-<footer class="text-center text-muted small py-5 border-top" style="border-color:var(--surface-line) !important;">
-  © 2026 ETEC CINEMA — Cinema Ticket Booking System · Team 4
-</footer>
+<?php include('../include/footer.php'); ?>
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
 <script>

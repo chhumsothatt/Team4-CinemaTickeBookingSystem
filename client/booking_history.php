@@ -74,7 +74,7 @@ include("../include/navbar.php");
 <main class="container py-4 py-lg-5">
 
   <!-- HISTORY SECTION -->
-  <section id="history" class="py-3">
+  <section id="history" class="pt-3 pb-0 mb-0">
     <div class="d-flex align-items-center mb-4">
       <div class="bg-danger rounded-pill me-3" style="width: 6px; height: 32px;"></div>
       <h2 class="fw-bold m-0 text-dark">ប្រវត្តិការកក់សំបុត្រ</h2>
@@ -107,6 +107,7 @@ include("../include/navbar.php");
   </section>
 
 </main>
+<?php include('../include/footer.php') ?>
 <script>
   $(document).ready(function(){
     $('#btnLogout').click(function(){
