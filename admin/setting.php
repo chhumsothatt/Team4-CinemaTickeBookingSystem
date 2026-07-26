@@ -17,30 +17,32 @@
       <!-- Form action should point to your backend script (e.g., update_profile.php) -->
       <form action="" method="POST" enctype="multipart/form-data">
         <div class="row">
-          
+
           <!-- Profile Picture Section -->
           <div class="col-md-4 text-center mb-4 mb-md-0 border-end">
             <!-- Placeholder avatar image -->
             <img src="../team/user.png"
-                 class="rounded-circle img-thumbnail mb-3 shadow-sm" 
-                 alt="Admin Avatar" 
-                 style="width: 150px; height: 150px; object-fit: cover;">
-            
+              class="rounded-circle img-thumbnail mb-3 shadow-sm"
+              alt="Admin Avatar"
+              style="width: 150px; height: 150px; object-fit: cover;">
+
           </div>
 
           <!-- Profile Details Section -->
           <div class="col-md-8 px-md-4">
             <h5 class="mb-4">Personal Information</h5>
-            
-            <div class="mb-3">
-              <label for="adminName" class="form-label">Full Name</label>
-              <input type="text" class="form-control" id="adminName" name="name" value="System Admin" required>
-            </div>
-            
-            <div class="mb-3">
-              <label for="adminEmail" class="form-label">Email Address</label>
-              <input type="email" class="form-control" id="adminEmail" name="email" value="admin@example.com" required>
-            </div>
+
+            <form id="profileForm">
+              <div class="mb-3">
+                <label class="form-label text-muted small fw-semibold">Full Name</label>
+                <div type="text" class="form-control" id="fullNameInput" name="name" ></div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label text-muted small fw-semibold">Email Address</label>
+                <div type="email" class="form-control" id="emailInput" name="email"> </div>
+              </div>
+            </form>
 
             <div class="border-bottom my-4" style="border-style: dashed !important; opacity: 0.2;"></div>
           </div>
@@ -52,4 +54,30 @@
 </div>
 
 </body>
+
 </html>
+<script>
+  $(document).ready(function () {
+    loadProfileData();
+
+    function loadProfileData() {
+        $.ajax({
+            url: '../api/profile/get.php',
+            type: 'GET',
+            dataType: 'json',
+            success: function (res) {
+                if (res.status === 'success') {
+                    //get name ,email as disble
+                    $('#fullNameInput').text(res.data.name);
+                    $('#emailInput').text(res.data.email);
+                } else {
+                    console.error('Error:', res.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX Error:', error);
+            }
+        });
+    }
+});
+</script>

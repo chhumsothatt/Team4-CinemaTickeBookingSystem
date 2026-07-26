@@ -63,11 +63,11 @@
           <canvas id="myChart"></canvas>
         </div>
       </div>
-        <div class="col-12 col-xl-6">
+        <div class="col-6 col-xl-6">
           <div class="stat-card card p-3" style="--accent:var(--ok)">
             <div class="text-muted small text-uppercase mb-2">Total Price</div>
-            <div class="value"  id="statTotalBookings">0</div>
-            <div class="delta"><i class="bi bi-arrow-up-short"></i><span id="statBookingsWeek">0</span>  this week</div>
+            <div class="value"  id="statTotalPrice">0</div>
+            <div class="delta"><i class="bi bi-arrow-up-short"></i><span id="statRevenueThisWeek">0</span>  this week</div>
           </div>
         </div>
       </div>
@@ -127,6 +127,9 @@ $(document).ready(function () {
 
                     $('#statTotalRooms').text(d.total_rooms);
                     $('#statVipRooms').text(d.vip_rooms);
+
+                    $('#statTotalPrice').text(d.total_price);
+                    $('#statRevenueThisWeek').text(d.revenue_this_week);
                 }
             },
             error: function (xhr, status, error) {
