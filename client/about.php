@@ -17,7 +17,7 @@ $team = [
     "photo" => "../team/member1.png",
   ],
   [
-    "name"  => "ពុធា",
+    "name"  => "ថេន​ ពុធា",
     "role"  => "Team Member",
     "photo" => "../team/th.png",
   ],
