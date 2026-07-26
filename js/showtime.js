@@ -1,7 +1,77 @@
 $(document).ready(function() {
     loadShowtimes();
 
-    // 💡 ទាញយក URL Params ដើមី្បដឹងថាស្ថិតនៅលើ Page ណា
+    // 💡 កំណត់ Minimum Date និងកម្រិត Filter ម៉ោង
+    function initDateTimeLimits() {
+        const $showDate = $('#show_date');
+        const $startTime = $('#start_time');
+
+        if ($showDate.length === 0) return;
+
+        // Function ទាញយកថ្ងៃនេះជាទម្រង់ YYYY-MM-DD
+        function getTodayString() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        // ១. កំណត់ Min Date មិនឱ្យជ្រើសរើសថ្ងៃកន្លងផុត
+        function updateMinDate() {
+            const todayStr = getTodayString();
+            $showDate.attr('min', todayStr);
+        }
+
+        // ២. Function ពិនិត្យម៉ោងពេលជ្រើសរើស Date ឬ Start Time
+        function checkTimeLimit() {
+            const selectedDate = $showDate.val();
+            const selectedStartTime = $startTime.val();
+
+            if (!selectedDate) return;
+
+            const todayStr = getTodayString();
+            const now = new Date();
+
+            // ករណីជ្រើសរើសថ្ងៃនេះ
+            if (selectedDate === todayStr) {
+                const curHours = String(now.getHours()).padStart(2, '0');
+                const curMinutes = String(now.getMinutes()).padStart(2, '0');
+                const currentTimeStr = `${curHours}:${curMinutes}`;
+
+                // កំណត់ min time ត្រឹមម៉ោងបច្ចុប្បន្ន
+                $startTime.attr('min', currentTimeStr);
+
+                // បើ User ជ្រើសម៉ោងដែលកន្លងផុត
+                if (selectedStartTime && selectedStartTime < currentTimeStr) {
+                    alert('សូមជ្រើសរើសម៉ោងដែលមិនទាន់មកដល់!');
+                    $startTime.val('');
+                }
+            } else if (selectedDate < todayStr) {
+                // បើជ្រើសរើសថ្ងៃដែលកន្លងផុត
+                alert('សូមជ្រើសរើសថ្ងៃចាប់ពីថ្ងៃនេះ ឬថ្ងៃបន្ទាប់!');
+                $showDate.val('');
+                $startTime.removeAttr('min');
+            } else {
+                // បើជ្រើសថ្ងៃបន្ទាប់ៗ លុបការ Restriction ម៉ោងចេញ
+                $startTime.removeAttr('min');
+            }
+        }
+
+        // Update Min Date ភ្លាមៗពេល Load Page
+        updateMinDate();
+
+        // Bind Events ដើម្បី Update និងពិនិត្យរាល់ពេល User ចុចជ្រើសរើស
+        $(document).on('change input click focus', '#show_date, #start_time', function() {
+            updateMinDate();
+            checkTimeLimit();
+        });
+    }
+
+    // Call function control Date & Time
+    initDateTimeLimits();
+
+    // 💡 ទាញយក URL Params ដើម្បីដឹងថាស្ថិតនៅលើ Page ណា
     let urlParams = new URLSearchParams(window.location.search);
     let showtimeId = urlParams.get('id');
 
@@ -11,11 +81,8 @@ $(document).ready(function() {
             loadShowtimeForEdit(showtimeId);
         });
     } 
-    // ប្រសិនបើជា Page createTime.php (គ្មាន ID) ឱ្យ Load តែ Dropdown មកបានហើយ
-    else if ($('#createTimeForm').length > 0) {
-        loadMoviesDropdown();
-        loadRoomsDropdown();
-    } else {
+    // ប្រសិនបើជា Page createTime.php (គ្មាន ID) ឱ្យ Load តែ Dropdown
+    else {
         loadMoviesDropdown();
         loadRoomsDropdown();
     }
@@ -147,10 +214,35 @@ $(document).ready(function() {
         });
     }
 
-    // 5. 💡 SUBMIT FORM ADD / CREATE SHOWTIME (#createTimeForm)
+    // 5. SUBMIT FORM ADD / CREATE SHOWTIME (#createTimeForm)
     $(document).on('submit', '#createTimeForm, #addShowtimeForm', function(e) {
         e.preventDefault();
         
+        // Validation បន្ថែមចុងក្រោយមុនពេល Submit
+        const selectedDate = $('#show_date').val();
+        const selectedStartTime = $('#start_time').val();
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const todayStr = `${year}-${month}-${day}`;
+
+        if (selectedDate < todayStr) {
+            alert('សូមជ្រើសរើសថ្ងៃចាប់ពីថ្ងៃនេះ ឬថ្ងៃបន្ទាប់!');
+            return false;
+        }
+
+        if (selectedDate === todayStr && selectedStartTime) {
+            const curHours = String(now.getHours()).padStart(2, '0');
+            const curMinutes = String(now.getMinutes()).padStart(2, '0');
+            const currentTimeStr = `${curHours}:${curMinutes}`;
+
+            if (selectedStartTime < currentTimeStr) {
+                alert('សូមជ្រើសរើសម៉ោងដែលមិនទាន់មកដល់!');
+                return false;
+            }
+        }
+
         $.ajax({
             url: '../api/showtime/insert.php',
             type: 'POST',
@@ -161,7 +253,7 @@ $(document).ready(function() {
                     alert(res.message);
                     window.location.href = 'showtime.php';
                 } else {
-                    alert(' Error: ' + res.message);
+                    alert('Error: ' + res.message);
                 }
             },
             error: function(xhr) {
@@ -185,7 +277,7 @@ $(document).ready(function() {
                     alert(res.message);
                     window.location.href = 'showtime.php';
                 } else {
-                    alert(' Error: ' + res.message);
+                    alert('Error: ' + res.message);
                 }
             },
             error: function(xhr) {

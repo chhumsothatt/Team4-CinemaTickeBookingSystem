@@ -25,7 +25,7 @@
       <div class="card p-4 shadow-sm border-0">
         <h3 class="mb-4">Showtime Details</h3>
         
-        <!-- 💡 បន្ថែម method="POST" ការពារ Submit តាម GET -->
+        <!-- 💡 Form Submit -->
         <form id="createTimeForm" method="POST">
           
           <!-- Dropdown Movie -->
@@ -50,16 +50,10 @@
             <input type="date" class="form-control" id="show_date" name="show_date" required>
           </div>
 
-          <!-- Start & End Time -->
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="start_time" class="form-label">Start Time</label>
-              <input type="time" class="form-control" id="start_time" name="start_time" required>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="end_time" class="form-label">End Time</label>
-              <input type="time" class="form-control" id="end_time" name="end_time" required>
-            </div>
+          <!-- Start Time (ដក End Time ចេញរួចរាល់) -->
+          <div class="mb-3">
+            <label for="start_time" class="form-label">Start Time</label>
+            <input type="time" class="form-control" id="start_time" name="start_time" required>
           </div>
 
           <!-- Ticket Price -->
