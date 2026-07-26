@@ -99,7 +99,7 @@
 <aside class="sidebar" id="sidebar">
   <div class="brand d-flex align-items-center gap-2 font-display fs-3">
     <a href="../client/index.php" class="text-decoration-none d-flex align-items-center gap-2">
-      <span class="bulb"></span><span class="text-marquee">CINÉ</span><span class="fs-6 fw-normal text-dark">ADMIN</span>
+      <span class="bulb"></span><span class="text-marquee">ADMIN</span><span class="fs-6 fw-normal text-dark"></span>
     </a>
   </div>
 
@@ -112,12 +112,11 @@
     <a class="nav-link" id="category" href="../admin/category.php"><i class="bi bi-tags"></i> Categories</a>
     <a class="nav-link" id="room" href="../admin/room.php"><i class="bi bi-door-open"></i> Cinema Rooms</a>
     <a class="nav-link" id="showtime" href="../admin/showtime.php"><i class="bi bi-clock-history"></i> Showtimes</a>
-
     <div class="nav-section-label mt-3">Reports</div>
     <a class="nav-link" href="../admin/book_history.php"><i class="bi bi-ticket-perforated"></i> Booking History</a>
-  </nav>
+    <a class="nav-link" href="../admin/setting.php"><i class="bi bi-gear"></i> Setting</a>
 
-  <div class="sidebar-footer">
+  <div class="sidebar-footer mt-5">
     <div class="avatar">SA</div>
     <div>
       <div class="fw-semibold small">Sok Admin</div>
@@ -125,6 +124,9 @@
     </div>
     <button id="btnLogout" class="btn text-light btn-danger btn-sm btn-outline-cinema ms-auto"><i class="bi bi-box-arrow-right"></i></button>
   </div>
+  </nav>
+
+
 
 </aside>
 

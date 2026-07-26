@@ -1,5 +1,5 @@
 <?php 
-session_start();
+// session_start();
 include("../include/header.php");
 include("../include/navbar.php");
 ?>
@@ -199,6 +199,22 @@ body {
 <footer class="text-center text-muted small py-4 border-top">
   © 2026 ETEC CINEMA — Cinema Ticket Booking System · Team 4
 </footer>
+<script>
+  $(document).ready(function(){
+    $('#btnLogout').click(function(){
+      $.ajax({
+        url: '../api/auth_handler.php',
+        method: 'POST',
+        dataType: 'json',
+        data: {action: 'logout'},
+        success: function(){
+          window.location.href = '../login.php';
+        }
+      })
+
+    })
+  })
+</script>
 
 
 <script src="../js/detailmovie.js"></script>

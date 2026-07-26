@@ -1,4 +1,5 @@
 <script src="../jquery/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <?php 
   include("../include/sidebar.php");
 ?>
@@ -56,6 +57,20 @@
           </div>
         </div>
       </div>
+      <div class="row g-3 mb-4">
+        <div class="col-12 col-xl-6">
+        <div style="width: 600px; height: 300px;">
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+        <div class="col-12 col-xl-6">
+          <div class="stat-card card p-3" style="--accent:var(--ok)">
+            <div class="text-muted small text-uppercase mb-2">Total Price</div>
+            <div class="value"  id="statTotalBookings">0</div>
+            <div class="delta"><i class="bi bi-arrow-up-short"></i><span id="statBookingsWeek">0</span>  this week</div>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>
@@ -63,7 +78,29 @@
 
 
 </div>
-
+<script>
+  const ctx = document.getElementById('myChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      datasets: [{
+        label: 'Monthly Revenue ($K)',
+        data: [12, 19, 14, 25, 22, 30],
+        backgroundColor: '#c83241', // Updated to Red
+        borderColor: '#a62532',     // Darker Red Border
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
 
 <script>
 $(document).ready(function () {
