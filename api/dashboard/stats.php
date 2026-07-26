@@ -12,6 +12,16 @@ function getCount($pdo, $sql) {
     }
 }
 
+// Safe function to calculate total 
+function getSum($pdo, $sql) {
+    try {
+        $stmt = $pdo->query($sql);
+        return $stmt ? (float)$stmt->fetchColumn() : 0.00;
+    } catch (Exception $e) {
+        return 0.00;
+    }
+}
+
 // 1. MOVIES STATS
 $totalMovies     = getCount($pdo, "SELECT COUNT(*) FROM tbl_movies");
 $moviesThisMonth = getCount($pdo, "SELECT COUNT(*) FROM tbl_movies WHERE MONTH(created_at) = MONTH(CURRENT_DATE()) AND YEAR(created_at) = YEAR(CURRENT_DATE())");
@@ -23,6 +33,8 @@ $usersThisMonth  = getCount($pdo, "SELECT COUNT(*) FROM tbl_users WHERE MONTH(cr
 // 3. BOOKINGS STATS
 $totalBookings    = getCount($pdo, "SELECT COUNT(*) FROM tbl_bookings");
 $bookingsThisWeek = getCount($pdo, "SELECT COUNT(*) FROM tbl_bookings WHERE YEARWEEK(created_at, 1) = YEARWEEK(CURRENT_DATE(), 1)");
+$totalPrice       = getSum($pdo, "SELECT COALESCE(SUM(total_price), 0) FROM tbl_bookings");
+$revenueThisWeek  = getSum($pdo, "SELECT COALESCE(SUM(total_price), 0) FROM tbl_bookings WHERE YEARWEEK(created_at, 1) = YEARWEEK(CURRENT_DATE(), 1)");
 
 // 4. CINEMA ROOMS STATS (Updated Table Name)
 $totalRooms = getCount($pdo, "SELECT COUNT(*) FROM tbl_cinema_rooms");
@@ -36,6 +48,8 @@ echo json_encode([
         'total_users'        => number_format($totalUsers),
         'users_this_month'   => $usersThisMonth,
         'total_bookings'     => number_format($totalBookings),
+        'total_price'        => '$' . number_format($totalPrice, 2),
+        'revenue_this_week'  => '$' . number_format($revenueThisWeek, 2),
         'bookings_this_week' => $bookingsThisWeek,
         'total_rooms'        => number_format($totalRooms),
         'vip_rooms'          => $vipRooms
