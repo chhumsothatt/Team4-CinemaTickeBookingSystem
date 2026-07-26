@@ -1,7 +1,7 @@
 <?php include("../include/sidebar.php"); ?>
 
 <div class="main-content p-4">
-  <div class="d-flex justify-content-between align-items-center mb-2">
+  <div class="d-flex justify-content-between align-items-center mb-2 ">
     <div>
       <h2 class="font-display fw-bold mb-0 text-uppercase">SHOWTIMES</h2>
       <div class="text-muted small">គ្រប់គ្រងកាលវិភាគបញ្ចាំងភាពយន្ត</div>
