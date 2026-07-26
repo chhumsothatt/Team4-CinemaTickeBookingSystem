@@ -129,4 +129,5 @@ $(document).on('click', '#btnGoToBooking', function (e) {
 
     // Redirect ទៅកាន់ទំព័រ booking.php ជាមួយ showtime_id
     window.location.href = `./booking.php?showtime_id=${selectedShowtime}`;
+
 });

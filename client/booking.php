@@ -1,7 +1,6 @@
 <?php
 session_start();
-require_once '../middleware/authMiddlware.php';
-requireAuthPage();
+include('../middleware/isLogin.php');
 include("../include/header.php");
 include("../include/navbar.php");
 
@@ -177,7 +176,22 @@ include("../include/navbar.php");
         </div>
     </div>
 </div>
+<script>
+  $(document).ready(function(){
+    $('#btnLogout').click(function(){
+      $.ajax({
+        url: '../api/auth_handler.php',
+        method: 'POST',
+        dataType: 'json',
+        data: {action: 'logout'},
+        success: function(){
+          window.location.href = '../login.php';
+        }
+      })
 
+    })
+  })
+</script>
 <!-- Bootstrap 5 JS Bundle (រួមមាន Popper ផងដែរ) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
